@@ -18,11 +18,11 @@ impl Lexer {
             linea: 1,
             columna: 0,
         };
-        l.read_char();
+        l.leer_caracter();
         l
     }
 
-    fn read_char(&mut self) {
+    fn leer_caracter(&mut self) {
         if self.posicion >= self.input.len() {
             self.caracter_actual = None;
         } else {
@@ -101,7 +101,7 @@ impl Lexer {
             },
         };
 
-        self.read_char();
+        self.leer_caracter();
         token
     }
 
@@ -110,7 +110,7 @@ impl Lexer {
     fn skip_espacioblanco(&mut self) {
         while let Some(c) = self.caracter_actual {
             if c.is_whitespace() {
-                self.read_char();
+                self.leer_caracter();
             } else {
                 break;
             }
@@ -122,7 +122,7 @@ impl Lexer {
         while let Some(c) = self.caracter_actual {
             if c.is_ascii_alphanumeric() || c == '_' {
                 identificador_literal.push(c);
-                self.read_char();
+                self.leer_caracter();
             } else {
                 break;
             }
@@ -135,7 +135,7 @@ impl Lexer {
         while let Some(c) = self.caracter_actual {
             if c.is_ascii_digit() {
                 numero_literal.push(c);
-                self.read_char();
+                self.leer_caracter();
             } else {
                 break;
             }
